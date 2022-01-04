@@ -54,7 +54,7 @@ steps:
   args: ['apply', '-f', 'k8s']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=gcluster-1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
 
 # Deploy container image to GKE
 # - id: 'Push the image to cluster with the latest tag'
