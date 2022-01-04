@@ -17,6 +17,13 @@ steps:
   - test
   waitFor: [install-module]
 
+# Build Nest App
+- id: build-app
+  name: 'gcr.io/cloud-builders/yarn'
+  args: 
+  - build
+  waitFor: [install-module]
+
 # Build container image
 - id: build-docker-image
   name: gcr.io/cloud-builders/docker
