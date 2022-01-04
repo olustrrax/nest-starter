@@ -51,7 +51,7 @@ steps:
   - --filename=k8s
   - --image=asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA
   - --location=asia-southeast1-a
-  - --cluster='cluster-1'
+  - --cluster=cluster-1
 
 images: [
   'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA'
