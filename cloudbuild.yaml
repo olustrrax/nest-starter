@@ -13,7 +13,8 @@ steps:
 # Run unit test
 - id: run-unit-test
   name: 'gcr.io/cloud-builders/yarn'
-  args: ['test', 'order-service']
+  args: 
+  - test
   waitFor: [install-module]
 
 # Build container image
