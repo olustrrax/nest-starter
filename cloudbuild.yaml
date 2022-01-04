@@ -42,6 +42,18 @@ steps:
   args:
     - push
     - asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA
+# Update Image Tags
+- id: 'Setting App Image Tag'
+  name: ubuntu
+  args: ['bash','-c','sed -i "s,APP_IMAGE_NAME,asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA," deployment.yaml']
+
+# Apply kubernetes files changed
+- id: Apply k8s config changed
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'k8s']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=gcluster-1'
 
 # Deploy container image to GKE
 - id: 'Push the image to cluster with the latest tag'

@@ -18,8 +18,12 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: nest-starter
-          image: asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:latest
+          image: APP_IMAGE_NAME
           imagePullPolicy: Always
+          command: ['sh', '-c', 'cp -r /app /srv; chown -R 82:82 /srv/app']
+          volumeMounts:
+          - name: code
+            mountPath: /srv
           ports:
             - name: http
               containerPort: 3000
@@ -34,6 +38,6 @@ spec:
               port: http
           resources:
             limits:
-              memory: "512Mi"
+              memory: "300Mi"
             requests:
               memory: "256Mi"
