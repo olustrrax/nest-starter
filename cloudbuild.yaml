@@ -1,0 +1,40 @@
+steps:
+- name: 'bash'
+  args: 
+  - echo
+  - 'I am running in a pool with commit!'
+
+# Install node_modules
+- id: install-module
+  name: 'gcr.io/cloud-builders/yarn'
+  args: 
+  - install
+
+# Run unit test
+- id: run-unit-test
+  name: 'gcr.io/cloud-builders/yarn'
+  args: ['test', 'order-service']
+  waitFor: [install-module]
+
+# Build container image
+- id: build-docker-image
+  name: gcr.io/cloud-builders/docker
+  args: [
+   'build',
+   '-f',
+   './Dockerfile',
+   '-t',
+   'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter:$COMMIT_SHA',
+   '.'
+  ]
+
+# Push container image to Google Cloud Registry
+- id: Push image to Google Cloud Registry
+  name: gcr.io/cloud-builders/docker
+  args:
+    - push
+    - asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter:$COMMIT_SHA
+
+images: [
+  'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter:$COMMIT_SHA'
+]
