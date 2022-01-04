@@ -38,6 +38,7 @@ spec:
               port: http
           resources:
             limits:
-              memory: "300Mi"
+              memory: "128Mi"
             requests:
-              memory: "256Mi"
+              memory: "128Mi"
+# https://stackoverflow.com/questions/51479556/what-is-best-method-to-update-image-tag-to-commit-sha-via-cloudbuilder
