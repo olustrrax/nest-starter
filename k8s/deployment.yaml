@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: nest-starter
-          image: asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter:latest
+          image: asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:latest
           imagePullPolicy: Always
           ports:
             - name: http

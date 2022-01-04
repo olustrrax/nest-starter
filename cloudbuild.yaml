@@ -32,7 +32,7 @@ steps:
    '-f',
    './Dockerfile',
    '-t',
-   'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter:$COMMIT_SHA',
+   'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA',
    '.'
   ]
 
@@ -41,8 +41,8 @@ steps:
   name: gcr.io/cloud-builders/docker
   args:
     - push
-    - asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter:$COMMIT_SHA
+    - asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA
 
 images: [
-  'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter:$COMMIT_SHA'
+  'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA'
 ]
