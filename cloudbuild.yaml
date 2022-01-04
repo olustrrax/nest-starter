@@ -36,12 +36,22 @@ steps:
    '.'
   ]
 
-# Push container image to Google Cloud Registry
-- id: Push image to Google Cloud Registry
+# Push container image to Artifact Registry
+- id: push-docker-image
   name: gcr.io/cloud-builders/docker
   args:
     - push
     - asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA
+
+# Deploy container image to GKE
+- id: 'Push the image to cluster with the latest tag'
+  name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=k8s
+  - --image=asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA
+  - --location=asia-southeast1-a
+  - --cluster='cluster-1'
 
 images: [
   'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA'
