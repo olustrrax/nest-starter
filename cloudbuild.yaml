@@ -56,16 +56,6 @@ steps:
   - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
 
-# Deploy container image to GKE
-# - id: 'Push the image to cluster with the latest tag'
-#   name: "gcr.io/cloud-builders/gke-deploy"
-#   args:
-#   - run
-#   - --filename=k8s
-#   - --image=asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA
-#   - --location=asia-southeast1-a
-#   - --cluster=cluster-1
-
 images: [
   'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:$COMMIT_SHA'
 ]

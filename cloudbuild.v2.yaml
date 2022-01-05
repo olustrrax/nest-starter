@@ -1,0 +1,61 @@
+steps:
+- name: 'bash'
+  args: 
+  - echo
+  - 'I am running in a pool with a latest image!'
+
+# Install node_modules
+- id: install-module
+  name: 'gcr.io/cloud-builders/yarn'
+  args: 
+  - install
+
+# Run unit test
+- id: run-unit-test
+  name: 'gcr.io/cloud-builders/yarn'
+  args: 
+  - test
+  waitFor: [install-module]
+
+# Build Nest App
+- id: build-app
+  name: 'gcr.io/cloud-builders/yarn'
+  args: 
+  - build
+  waitFor: [install-module]
+
+# Build container image
+- id: build-docker-image
+  name: gcr.io/cloud-builders/docker
+  args: [
+   'build',
+   '-f',
+   './Dockerfile',
+   '-t',
+   'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:latest',
+   '.'
+  ]
+
+# Push container image to Artifact Registry
+- id: push-docker-image
+  name: gcr.io/cloud-builders/docker
+  args:
+    - push
+    - asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:latest
+
+# Step6: Deploy container image to GKE
+- id: 'Push the image to cluster with the latest tag'
+  name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+    - run
+    - --filename=k8s
+    - --image=asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:latest
+    - --location=asia-southeast1-a
+    - --cluster=cluster-1
+
+
+# Deploy container image to GKE
+
+images: [
+  'asia-southeast1-docker.pkg.dev/fresh-weft-336116/nest-starter/nest-image:latest'
+]

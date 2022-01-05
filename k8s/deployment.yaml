@@ -20,10 +20,10 @@ spec:
         - name: nest-starter
           image: APP_IMAGE_NAME
           imagePullPolicy: Always
-          command: ['sh', '-c', 'cp -r /app /srv; chown -R 82:82 /srv/app']
-          volumeMounts:
-          - name: code
-            mountPath: /srv
+          # command: ['sh', '-c', 'cp -r /app /srv; chown -R 82:82 /srv/app']
+          # volumeMounts:
+          # - name: code
+          #   mountPath: /srv
           ports:
             - name: http
               containerPort: 3000
@@ -41,7 +41,7 @@ spec:
               memory: "128Mi"
             requests:
               memory: "128Mi"
-      volumes:
-        - name: code
-          emptyDir: {}
+      # volumes:
+      #   - name: code
+      #     emptyDir: {}
 # https://stackoverflow.com/questions/51479556/what-is-best-method-to-update-image-tag-to-commit-sha-via-cloudbuilder
