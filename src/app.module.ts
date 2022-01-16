@@ -1,5 +1,5 @@
 import { BullModule } from '@nestjs/bull';
-import { Module } from '@nestjs/common';
+import { Module, Logger } from '@nestjs/common';
 import { BullConfigService } from 'configs/bull.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -18,6 +18,6 @@ import { WriteConsumer } from './processors/manager-b.processor';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, HelloConsumer, WriteConsumer],
+  providers: [AppService, HelloConsumer, WriteConsumer, Logger],
 })
 export class AppModule {}
