@@ -10,6 +10,11 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('write')
+  write() {
+    return this.appService.write();
+  }
+
   @Get('Healthz')
   getHealthz(): string {
     return 'ok';

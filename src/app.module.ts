@@ -3,16 +3,21 @@ import { Module } from '@nestjs/common';
 import { BullConfigService } from 'configs/bull.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { HelloConsumer } from './processors/hello.processor';
+import { HelloConsumer } from './processors/manager-a.processor';
+import { WriteConsumer } from './processors/manager-b.processor';
 
 @Module({
   imports: [
     BullModule.registerQueueAsync({
       useClass: BullConfigService,
-      name: 'hello',
+      name: 'managerA',
+    }),
+    BullModule.registerQueueAsync({
+      useClass: BullConfigService,
+      name: 'managerB',
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, HelloConsumer],
+  providers: [AppService, HelloConsumer, WriteConsumer],
 })
 export class AppModule {}
