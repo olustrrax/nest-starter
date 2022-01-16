@@ -12,7 +12,7 @@ export class AppService {
   ) {}
   getHello() {
     this.helloQueue.add('hello_welcome', 'hello welcome', {
-      // delay: 300000, // 5 mins delayed
+      delay: 300000, // 5 mins delayed
       attempts: 3,
       removeOnComplete: true,
     });
